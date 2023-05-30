@@ -1,8 +1,6 @@
 image: ghcr.io/vnagubandi25/masked:latest
-duration: 600
 project: masked
 target: unit
 tasks:
-  - name: regression_testing
 cmds:
   - cmd: /unit

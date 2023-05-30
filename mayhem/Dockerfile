@@ -14,8 +14,6 @@ COPY --from=builder /MaskedVByte /
 
 # WORKDIR /MaskedVByte /
 
-RUN /unit
-
 
 
 # RUN ls

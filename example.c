@@ -5,7 +5,7 @@
 #include "varintencode.h"
 #include "varintdecode.h"
 
-int main() {
+int LLVMFuzzerTestOneInput(char* data, size_t size) {
 	int N = 5000;
 	uint32_t * datain = malloc(N * sizeof(uint32_t));
 	uint8_t * compressedbuffer = malloc(N * sizeof(uint32_t));
@@ -13,14 +13,12 @@ int main() {
 	for (int k = 0; k < N; ++k)
 		datain[k] = 120;
 	size_t compsize = vbyte_encode(datain, N, compressedbuffer); // encoding
-	// here the result is stored in compressedbuffer using compsize bytes
-	size_t compsize2 = masked_vbyte_decode(compressedbuffer, recovdata,
-					N); // decoding (fast)
+	size_t compsize2 = masked_vbyte_decode(data, recovdata,
+					N);
 	assert(compsize == compsize2);
 	free(datain);
 	free(compressedbuffer);
 	free(recovdata);
-	printf("Compressed %d integers down to %d bytes.\n",N,(int) compsize);
 	return 0;
 }
 
